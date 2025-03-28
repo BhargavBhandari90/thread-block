@@ -47,7 +47,7 @@ To format code, run:
 ## Found a Bug? ##
 
 If you find a bug, report here 
-[https://github.com/BhargavBhandari90/experience-block/issues](https://github.com/BhargavBhandari90/experience-block/issues)
+[https://github.com/BhargavBhandari90/thread-block/issues](https://github.com/BhargavBhandari90/thread-block/issues)
 
 ## Changelog ##
 

@@ -29,7 +29,7 @@ A Twitter/X-style thread builder for WordPress, letting you chain tweets (posts)
 4. How it looks on frontend
 
 == GitHub Repo ==
-[https://github.com/BhargavBhandari90/experience-block](https://github.com/BhargavBhandari90/experience-block)
+[https://github.com/BhargavBhandari90/thread-block](https://github.com/BhargavBhandari90/thread-block)
 
 == Changelog ==
 
