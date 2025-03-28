@@ -22,7 +22,7 @@ A Twitter/X-style thread builder for WordPress, letting you chain tweets (posts)
 3. Add/Edit post pr plugin and search "thread" while searching a block
 
 ## Demo
-Coming Soon
+https://github.com/user-attachments/assets/5d46aebf-c7f1-4cb0-90a4-5017a4f058cf
 
 ## Prerequisites
 - [Node/NPM](https://nodejs.org/en/download/)
