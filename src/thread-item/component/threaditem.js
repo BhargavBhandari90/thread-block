@@ -39,82 +39,84 @@ export default function Threaditem( {
 	};
 
 	return (
-		<div
-			ref={ setNodeRef }
-			style={ style }
-			{ ...attributes }
-			{ ...listeners }
-			className="thread-section"
-		>
-			<Button
-				className="drag-thread"
-				variant="tertiary"
-				icon={ dragHandle }
-				label={ __( 'Drag to reorder', 'thread-block' ) }
-			></Button>
-			<div className="thread-item-left">
-				{ index !== threads.length - 1 && (
-					<div
-						className="thread-line"
-						style={ {
-							borderLeft: `${ atts.threadLineWidth } ${ atts.threadLineType } ${ atts.threadLineColor }`,
+		<>
+			<div
+				ref={ setNodeRef }
+				style={ style }
+				{ ...attributes }
+				{ ...listeners }
+				className="thread-section"
+			>
+				<Button
+					className="drag-thread"
+					variant="tertiary"
+					icon={ dragHandle }
+					label={ __( 'Drag to reorder', 'thread-block' ) }
+				></Button>
+				<div className="thread-item-left">
+					{ index !== threads.length - 1 && (
+						<div
+							className="thread-line"
+							style={ {
+								borderLeft: `${ atts.threadLineWidth } ${ atts.threadLineType } ${ atts.threadLineColor }`,
+							} }
+						></div>
+					) }
+					<MediaUploadCheck>
+						<MediaUpload
+							onSelect={ ( media ) =>
+								updateThread( index, 'imageUrl', media.url )
+							}
+							allowedTypes={ [ 'image' ] }
+							render={ ( { open } ) => (
+								<>
+									<img
+										src={ thread.imageUrl || DEFAULT_IMAGE }
+										alt="Thread"
+									/>
+									<Button
+										icon={ media }
+										variant="tertiary"
+										{ ...attributes }
+										{ ...listeners }
+										onPointerDown={ ( event ) =>
+											event.stopPropagation()
+										}
+										onClick={ open }
+										className="thread-image-upload"
+									></Button>
+								</>
+							) }
+						/>
+					</MediaUploadCheck>
+				</div>
+				<div className="thread-item-right">
+					<RichText
+						tagName="p"
+						value={ thread.content }
+						{ ...attributes }
+						{ ...listeners }
+						onPointerDown={ ( event ) => event.stopPropagation() }
+						onChange={ ( newContent ) => {
+							updateThread( index, 'content', newContent );
 						} }
-					></div>
-				) }
-				<MediaUploadCheck>
-					<MediaUpload
-						onSelect={ ( media ) =>
-							updateThread( index, 'imageUrl', media.url )
-						}
-						allowedTypes={ [ 'image' ] }
-						render={ ( { open } ) => (
-							<>
-								<img
-									src={ thread.imageUrl || DEFAULT_IMAGE }
-									alt="Thread"
-								/>
-								<Button
-									icon={ media }
-									variant="tertiary"
-									{ ...attributes }
-									{ ...listeners }
-									onPointerDown={ ( event ) =>
-										event.stopPropagation()
-									}
-									onClick={ open }
-									className="thread-image-upload"
-								></Button>
-							</>
-						) }
+						placeholder="Enter text..."
 					/>
-				</MediaUploadCheck>
-			</div>
-			<div className="thread-item-right">
-				<RichText
-					tagName="p"
-					value={ thread.content }
+				</div>
+				<Button
+					className="remove-thread"
+					variant="tertiary"
+					icon={ close }
 					{ ...attributes }
 					{ ...listeners }
 					onPointerDown={ ( event ) => event.stopPropagation() }
-					onChange={ ( newContent ) => {
-						updateThread( index, 'content', newContent );
+					onClick={ ( event ) => {
+						event.stopPropagation();
+						removeThread( index );
 					} }
-					placeholder="Enter text..."
-				/>
+					isDestructive
+				></Button>
 			</div>
-			<Button
-				className="remove-thread"
-				variant="tertiary"
-				icon={ close }
-				{ ...attributes }
-				{ ...listeners }
-				onPointerDown={ ( event ) => event.stopPropagation() }
-				onClick={ ( event ) => {
-					event.stopPropagation();
-					removeThread( index );
-				} }
-				isDestructive
-			></Button>
-		</div>
+		</>
 	);
 }

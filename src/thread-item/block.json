@@ -5,7 +5,7 @@
 	"version": "1.0.0",
 	"title": "Thread",
 	"category": "widgets",
-	"icon": "list-view",
+	"icon": "editor-ul",
 	"description": "Thread Item.",
 	"example": {},
 	"supports": {
@@ -28,7 +28,7 @@
 		"color": {
 			"background": true,
 			"text": true,
-			"heading": true
+			"heading": false
 		}
 	},
 	"attributes": {
@@ -44,6 +44,13 @@
 		},
 		"threadLineType": {
 			"type": "string"
+		},
+		"threadTitle": {
+			"type": "string"
+		},
+		"titleAlignment": {
+			"type": "string",
+			"default": "left"
 		}
 	},
 	"textdomain": "thread-block",

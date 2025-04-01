@@ -1,10 +1,23 @@
 import { useBlockProps, RichText } from '@wordpress/block-editor';
 
 export default function save( { attributes } ) {
-	const { sections, threadLineColor, threadLineWidth, threadLineType } = attributes;
+	const {
+		sections,
+		threadLineColor,
+		threadLineWidth,
+		threadLineType,
+		threadTitle,
+		titleAlignment,
+	} = attributes;
 
 	return (
 		<div className="thread-item" { ...useBlockProps.save() }>
+			<RichText.Content
+				tagName="h2"
+				className="thread-title"
+				style={ { textAlign: titleAlignment } }
+				value={ threadTitle }
+			/>
 			{ sections.map( ( section, index ) => (
 				<div key={ section.id } className="thread-section">
 					<div className="thread-item-left">
