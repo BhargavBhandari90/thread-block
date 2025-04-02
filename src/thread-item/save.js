@@ -38,6 +38,24 @@ export default function save( { attributes } ) {
 							tagName="p"
 							value={ section.content }
 						/>
+						{ section.threadImages &&
+							section.threadImages.length > 0 && (
+								<div className="thread-images-grid">
+									{ section.threadImages.map(
+										( imageItem, imageIndex ) => (
+											<div
+												key={ imageIndex }
+												className="thread-image-item"
+											>
+												<img
+													src={ imageItem.url }
+													alt={ imageItem.alt }
+												/>
+											</div>
+										)
+									) }
+								</div>
+							) }
 						<p></p>
 					</div>
 				</div>

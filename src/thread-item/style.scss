@@ -37,6 +37,66 @@
         flex: 1;
         padding: 10px;
 
+        /* Thread images grid styling */
+        .thread-images-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+            gap: 10px;
+            margin: 10px 0;
+            width: 100%;
+        }
+        
+        /* Single image treatment */
+        .thread-images-grid:has(.thread-image-item:only-child) {
+            grid-template-columns: 1fr;
+            max-width: 500px;
+        }
+        
+        .thread-image-item {
+            position: relative;
+            border-radius: 12px;
+            overflow: hidden;
+        }
+        
+        .thread-image-item img {
+            width: 100%;
+            height: auto;
+            max-height: 350px;
+            object-fit: cover;
+            display: block;
+        }
+        
+        .remove-image-button {
+            position: absolute !important;
+            top: 8px;
+            right: 8px;
+            background-color: rgba(0, 0, 0, 0.5) !important;
+            border-radius: 50% !important;
+            padding: 4px !important;
+            opacity: 0;
+            transition: opacity 0.2s ease;
+        }
+        
+        .thread-image-item:hover .remove-image-button {
+            opacity: 1;
+        }
+        
+        .remove-image-button svg {
+            fill: white;
+        }
+        
+        /* Image actions */
+        .thread-image-actions {
+            margin-top: 10px;
+        }
+        
+  /* Responsive adjustments */
+  @media (max-width: 600px) {
+    .thread-images-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+
         p {
             margin: 0;
         }

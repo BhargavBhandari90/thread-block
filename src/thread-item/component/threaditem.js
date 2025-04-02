@@ -4,8 +4,9 @@ import {
 	MediaUploadCheck,
 	RichText,
 } from '@wordpress/block-editor';
-import { Button } from '@wordpress/components';
-import { media, close, dragHandle } from '@wordpress/icons';
+import { Button, Popover, ButtonGroup } from '@wordpress/components';
+import { useState } from '@wordpress/element';
+import { media, close, dragHandle, image, video } from '@wordpress/icons';
 // import {
 // 	DndContext,
 // 	closestCenter,
@@ -33,9 +34,34 @@ export default function Threaditem( {
 	const { attributes, listeners, setNodeRef, transform, transition } =
 		useSortable( { id: thread.id } );
 
+	const [ isMediaPopoverVisible, setIsMediaPopoverVisible ] =
+		useState( false );
+
 	const style = {
 		transform: CSS.Transform.toString( transform ),
 		transition,
+	};
+
+	const addThreadImage = ( mediaObj ) => {
+		// Create a new images array if it doesn't exist
+		const imagesArray = thread.threadImages
+			? [ ...thread.threadImages ]
+			: [];
+
+		imagesArray.push( {
+			id: mediaObj.id,
+			url: mediaObj.url,
+			alt: mediaObj.alt || '',
+		} );
+
+		updateThread( index, 'threadImages', imagesArray );
+		setIsMediaPopoverVisible( false );
+	};
+
+	const removeThreadImage = ( imageIndex ) => {
+		const imagesArray = [ ...( thread.threadImages || [] ) ];
+		imagesArray.splice( imageIndex, 1 );
+		updateThread( index, 'threadImages', imagesArray );
 	};
 
 	return (
@@ -102,6 +128,86 @@ export default function Threaditem( {
 						} }
 						placeholder="Enter text..."
 					/>
+					{ thread.threadImages && thread.threadImages.length > 0 && (
+						<div className="thread-images-grid">
+							{ thread.threadImages.map(
+								( imageItem, imageIndex ) => (
+									<div
+										key={ imageIndex }
+										className="thread-image-item"
+									>
+										<img
+											src={ imageItem.url }
+											alt={ imageItem.alt }
+										/>
+										<Button
+											icon={ close }
+											variant="tertiary"
+											onClick={ ( e ) => {
+												e.stopPropagation();
+												removeThreadImage( imageIndex );
+											} }
+											onPointerDown={ ( event ) =>
+												event.stopPropagation()
+											}
+											className="remove-image-button"
+											isDestructive
+										/>
+									</div>
+								)
+							) }
+						</div>
+					) }
+
+					<div className="thread-image-actions">
+						<MediaUploadCheck>
+							<MediaUpload
+								onSelect={ ( media ) => {
+
+									if ( Array.isArray( media ) ) {
+
+										const imagesArray = thread.threadImages
+											? [ ...thread.threadImages ]
+											: [];
+
+										media.forEach( ( mediaItem ) => {
+											imagesArray.push( {
+												id: mediaItem.id,
+												url: mediaItem.url,
+												alt: mediaItem.alt || '',
+											} );
+										} );
+
+										updateThread(
+											index,
+											'threadImages',
+											imagesArray
+										);
+									} else {
+										// For backward compatibility, handle single media selection
+										addThreadImage( media );
+									}
+								} }
+								allowedTypes={ [ 'image' ] }
+								multiple={ true }
+								render={ ( { open } ) => (
+									<Button
+										icon={ image }
+										variant="secondary"
+										onClick={ ( e ) => {
+											e.stopPropagation();
+											open();
+										} }
+										onPointerDown={ ( event ) =>
+											event.stopPropagation()
+										}
+									>
+										{ __( 'Add Image', 'thread-block' ) }
+									</Button>
+								) }
+							/>
+						</MediaUploadCheck>
+					</div>
 				</div>
 				<Button
 					className="remove-thread"
