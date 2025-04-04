@@ -136,10 +136,12 @@ export default function Threaditem( {
 										key={ imageIndex }
 										className="thread-image-item"
 									>
-										<img
-											src={ imageItem.url }
-											alt={ imageItem.alt }
-										/>
+										<div className="thread-image">
+											<img
+												src={ imageItem.url }
+												alt={ imageItem.alt }
+											/>
+										</div>
 										<Button
 											icon={ close }
 											variant="tertiary"
@@ -163,9 +165,7 @@ export default function Threaditem( {
 						<MediaUploadCheck>
 							<MediaUpload
 								onSelect={ ( media ) => {
-
 									if ( Array.isArray( media ) ) {
-
 										const imagesArray = thread.threadImages
 											? [ ...thread.threadImages ]
 											: [];

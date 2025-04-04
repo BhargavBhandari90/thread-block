@@ -88,7 +88,7 @@ export default function Edit( { attributes, setAttributes } ) {
 
 	return (
 		<>
-			<div { ...blockProps } className="thread-item">
+			<div { ...blockProps }>
 				<BlockControls>
 					<ToolbarGroup>
 						<Tooltip
