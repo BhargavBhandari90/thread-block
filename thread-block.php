@@ -4,7 +4,7 @@
  * Description:       Example static block scaffolded with Create Block tool.
  * Requires at least: 5.8
  * Requires PHP:      7.0
- * Version:           0.1.0
+ * Version:           1.0.0
  * Author:            BuntyWP
  * Author URI:        https://biliplugins.com/
  * License:           GPL-2.0-or-later
