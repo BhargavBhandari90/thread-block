@@ -4,24 +4,11 @@ import {
 	MediaUploadCheck,
 	RichText,
 } from '@wordpress/block-editor';
-import { Button, Popover, ButtonGroup } from '@wordpress/components';
+import { Button } from '@wordpress/components';
 import { useState } from '@wordpress/element';
-import { media, close, dragHandle, image, video } from '@wordpress/icons';
-// import {
-// 	DndContext,
-// 	closestCenter,
-// 	useSensor,
-// 	useSensors,
-// } from '@dnd-kit/core';
-// import {
-// 	arrayMove,
-// 	SortableContext,
-// 	verticalListSortingStrategy,
-// } from '@dnd-kit/sortable';
+import { media, close, dragHandle, image } from '@wordpress/icons';
 import { useSortable } from '@dnd-kit/sortable';
 import { CSS } from '@dnd-kit/utilities';
-
-const DEFAULT_IMAGE = 'https://placehold.co/100';
 
 export default function Threaditem( {
 	thread,
@@ -42,8 +29,9 @@ export default function Threaditem( {
 		transition,
 	};
 
+	const DEFAULT_IMAGE = BWPThread.defaultImage ?? '';
+
 	const addThreadImage = ( mediaObj ) => {
-		// Create a new images array if it doesn't exist
 		const imagesArray = thread.threadImages
 			? [ ...thread.threadImages ]
 			: [];

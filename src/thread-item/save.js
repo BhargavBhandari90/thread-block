@@ -11,8 +11,6 @@ export default function save( { attributes } ) {
 		titleAlignment,
 	} = attributes;
 
-	console.log( sections );
-
 	return (
 		<div
 			data-wp-interactive="buntywp/thread-item"
