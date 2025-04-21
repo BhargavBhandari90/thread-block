@@ -14,6 +14,10 @@
  * @package           thread-block
  */
 
+if ( ! defined( 'ABSPATH' ) ) {
+	exit; // Exit if accessed directly.
+}
+
 if ( ! defined( 'BWPTB_VERSION' ) ) {
 	/**
 	 * The version of the plugin.
