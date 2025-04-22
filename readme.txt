@@ -3,7 +3,7 @@ Contributors:      bhargavbhandari90, biliplugins
 Donate link:       https://www.paypal.me/BnB90/20
 Tags:              block, thread, twitter thread, blocks
 Requires at least: 6.6
-Tested up to:      6.7
+Tested up to:      6.8
 Stable tag:        1.0.0
 License:           GPL-2.0-or-later
 Requires PHP:      7.4
